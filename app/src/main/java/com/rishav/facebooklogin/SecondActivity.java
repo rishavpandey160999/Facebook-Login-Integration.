@@ -48,6 +48,7 @@ public class SecondActivity extends AppCompatActivity {
 
                 startActivity(new Intent(SecondActivity.this, MainActivity.class));
                 Toast.makeText(SecondActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
         }

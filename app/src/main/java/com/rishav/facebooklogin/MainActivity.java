@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("keyemail",email);
                             intent.putExtra("keyimage",image);
                             startActivity(intent);
+                            finish();
 
 
                         } catch (JSONException e) {
