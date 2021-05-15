@@ -7,10 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -102,11 +99,11 @@ public class MainActivity extends AppCompatActivity {
                             String email=object.getString("email");
                             String image=object.getJSONObject("picture").getJSONObject("data").getString("url");
 
-                            a.setText(name);
-                            b.setText(email);
-
-                            Glide.with(MainActivity.this).load(image).into(c);
-
+                            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                            intent.putExtra("keyname",name);
+                            intent.putExtra("keyemail",email);
+                            intent.putExtra("keyimage",image);
+                            startActivity(intent);
 
 
                         } catch (JSONException e) {
@@ -126,26 +123,4 @@ public class MainActivity extends AppCompatActivity {
         graphRequest.executeAsync();
     }
 
-         AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
-             @Override
-             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-
-                 if (currentAccessToken == null) {
-
-                     a.setText("");
-                     b.setText("");
-                     c.setImageResource(0);
-                     Toast.makeText(MainActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
-
-                 }
-
-             }
-
-         };
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        accessTokenTracker.stopTracking();
-    }
 }
